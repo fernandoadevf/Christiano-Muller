@@ -69,11 +69,13 @@ const Linktree: React.FC = () => {
         {/* Seção do perfil */}
         <div className="text-center space-y-4">
           <div className="relative">
-            <img 
-              src="/images/foto1.png" 
-              alt="Christiano Muller" 
-              className="w-24 h-24 rounded-full mx-auto border-4 border-white/20 shadow-2xl object-cover object-center"
-            />
+            <div className="w-24 h-24 rounded-full mx-auto border-4 border-white/20 shadow-2xl overflow-hidden">
+              <img 
+                src="/images/teste22.png" 
+                alt="Christiano Muller" 
+                className="w-full h-full object-cover object-center scale-125"
+              />
+            </div>
           </div>
           <h1 className="text-2xl font-bold text-white">Christiano Muller</h1>
           <p className="text-white/80 text-sm leading-relaxed">
