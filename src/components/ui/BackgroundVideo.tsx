@@ -11,11 +11,7 @@ const BackgroundVideo: React.FC = () => {
       try {
         video.muted = true
         video.playsInline = true as unknown as boolean
-        video.setAttribute('playsinline', '')
-        video.setAttribute('webkit-playsinline', '')
-        video.setAttribute('muted', '')
-        video.setAttribute('autoplay', '')
-        video.setAttribute('loop', '')
+         video.setAttribute('loop', '')
       } catch {}
     }
 
