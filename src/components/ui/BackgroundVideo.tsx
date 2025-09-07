@@ -7,7 +7,15 @@ const BackgroundVideo: React.FC = () => {
     const video = videoRef.current
     if (!video) return
 
+    const setInlineProps = () => {
+      try {
+        video.muted = true
+        video.playsInline = true as unknown as boolean
+      } catch {}
+    }
+
     const tryPlay = async () => {
+      setInlineProps()
       try {
         await video.play()
       } catch {
@@ -17,8 +25,22 @@ const BackgroundVideo: React.FC = () => {
       }
     }
 
-    // Inicia somente em mobile; tailwind cuidará da visibilidade
-    tryPlay()
+    const handleCanPlay = () => { void tryPlay() }
+    const handleLoadedMetadata = () => { void tryPlay() }
+    const handleVisibility = () => { if (!document.hidden) void tryPlay() }
+
+    video.addEventListener('canplay', handleCanPlay)
+    video.addEventListener('loadedmetadata', handleLoadedMetadata)
+    document.addEventListener('visibilitychange', handleVisibility)
+
+    // Dispara uma primeira tentativa
+    void tryPlay()
+
+    return () => {
+      video.removeEventListener('canplay', handleCanPlay)
+      video.removeEventListener('loadedmetadata', handleLoadedMetadata)
+      document.removeEventListener('visibilitychange', handleVisibility)
+    }
   }, [])
 
   return (
