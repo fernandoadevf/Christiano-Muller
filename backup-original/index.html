@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fernandoarantes.ia | Linktree Personalizado</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Vídeo de fundo -->
+    <div class="background-video">
+        <!-- Opção 1: Use seu próprio vídeo MP4 -->
+        <video autoplay muted loop playsinline>
+            <source src="fundo.mp4" type="video/mp4">
+            <!-- Fallback para imagem estática se o vídeo não carregar -->
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1920&h=1080&fit=crop" alt="Background">
+        </video>
+        
+        <!-- Opção 2: Vídeo de exemplo (descomente se quiser usar) -->
+        <!--
+        <video autoplay muted loop playsinline>
+            <source src="https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4" type="video/mp4">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1920&h=1080&fit=crop" alt="Background">
+        </video>
+        -->
+    </div>
+    
+    <div class="container">
+
+
+        <!-- Seção do perfil -->
+        <div class="profile-section">
+            <div class="profile-picture">
+                <img src="./images/fernando.jpg" alt="Fernando Arantes" id="profileImage">
+            </div>
+            <h1 class="username">fernandoarantes.ia</h1>
+            <p class="bio">Criando conteúdo, apps e automações que fazem diferença.</p>
+            
+            <!-- Player do Spotify -->
+            <div class="spotify-player">
+                <h3 class="spotify-title">🎵 Música que mais to escutando essa semana</h3>
+                <div class="spotify-container">
+                    <iframe 
+                        data-testid="embed-iframe" 
+                        style="border-radius:12px; background: transparent;" 
+                        src="https://open.spotify.com/embed/track/62MEz6nR7fEtrUVwGLLNxq?utm_source=generator&theme=0" 
+                        width="500" 
+                        height="200" 
+                        frameBorder="0" 
+                        allowfullscreen="" 
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção dos links -->
+        <div class="links-section">
+            <a href="#" class="link-item" id="instagramLink">
+                <div class="slide-effect"></div>
+                <span class="link-text">Instagram</span>
+                <div class="icon-container">
+                    <i class="fas fa-ellipsis-v icon-default"></i>
+                    <i class="fas fa-chevron-right icon-hover"></i>
+                </div>
+            </a>
+            <a href="#" class="link-item" id="whatsappLink">
+                <div class="slide-effect"></div>
+                <span class="link-text">WhatsApp</span>
+                <div class="icon-container">
+                    <i class="fas fa-ellipsis-v icon-default"></i>
+                    <i class="fas fa-chevron-right icon-hover"></i>
+                </div>
+            </a>
+            <a href="#" class="link-item" id="websiteLink">
+                <div class="slide-effect"></div>
+                <span class="link-text">Automatize seu Negócio</span>
+                <div class="icon-container">
+                    <i class="fas fa-ellipsis-v icon-default"></i>
+                    <i class="fas fa-chevron-right icon-hover"></i>
+                </div>
+            </a>
+            <a href="#" class="link-item" id="consultoriaLink">
+                <div class="slide-effect"></div>
+                <span class="link-text">Consultoria de IA</span>
+                <div class="icon-container">
+                    <i class="fas fa-robot icon-default"></i>
+                    <i class="fas fa-chevron-right icon-hover"></i>
+                </div>
+            </a>
+        </div>
+
+        <!-- Footer com links legais -->
+        <footer class="footer">
+            <a href="#" class="footer-link">Cookie Preferences</a>
+            <span class="separator">•</span>
+            <a href="#" class="footer-link">Report</a>
+            <span class="separator">•</span>
+            <a href="#" class="footer-link">Privacy</a>
+        </footer>
+    </div>
+
+    <!-- Modal para configurações dos links -->
+    <div class="modal" id="linkModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Configurar Link</h3>
+                <button class="close-btn" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="linkTitle">Título do Link:</label>
+                    <input type="text" id="linkTitle" placeholder="Digite o título">
+                </div>
+                <div class="form-group">
+                    <label for="linkUrl">URL:</label>
+                    <input type="url" id="linkUrl" placeholder="https://exemplo.com">
+                </div>
+                <div class="form-group">
+                    <label for="linkIcon">Ícone:</label>
+                    <select id="linkIcon">
+                        <option value="fas fa-link">Link</option>
+                        <option value="fab fa-instagram">Instagram</option>
+                        <option value="fab fa-whatsapp">WhatsApp</option>
+                        <option value="fas fa-globe">Website</option>
+                        <option value="fas fa-robot">IA/Robô</option>
+                        <option value="fab fa-youtube">YouTube</option>
+                        <option value="fab fa-linkedin">LinkedIn</option>
+                        <option value="fab fa-twitter">Twitter</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancelEdit">Cancelar</button>
+                <button class="btn btn-primary" id="saveLink">Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
