@@ -7,33 +7,18 @@ const BackgroundVideo: React.FC = () => {
     const video = videoRef.current
     if (!video) return
 
-    const setInlineProps = () => {
-      try {
-        video.muted = true
-        video.playsInline = true
-        video.setAttribute('loop', '')
-      } catch {}
-    }
-
+    // Tenta tocar o vídeo automaticamente
     const tryPlay = async () => {
-      setInlineProps()
       try {
+        video.muted = true        // precisa estar mutado
+        video.playsInline = true   // obrigatório no mobile
         await video.play()
       } catch {
-        video.muted = true
-        try { await video.play() } catch {}
+        // se falhar, não quebra nada
       }
     }
 
-    const handleVisibility = () => { if (!document.hidden) void tryPlay() }
-    document.addEventListener('visibilitychange', handleVisibility)
-
-    // Dispara uma primeira tentativa
     void tryPlay()
-
-    return () => {
-      document.removeEventListener('visibilitychange', handleVisibility)
-    }
   }, [])
 
   return (
@@ -43,9 +28,9 @@ const BackgroundVideo: React.FC = () => {
         className="bg-video w-auto h-auto max-w-full max-h-full object-contain opacity-50"
         src="/videos/teste-23s-muted.mp4"
         autoPlay
-        muted
+        muted           // mutado por padrão
         loop
-    
+        playsInline     // ESSENCIAL para mobile
         preload="auto"
         controls={false}
         controlsList="nodownload nofullscreen noplaybackrate"
@@ -57,5 +42,3 @@ const BackgroundVideo: React.FC = () => {
 }
 
 export default BackgroundVideo
-
-
