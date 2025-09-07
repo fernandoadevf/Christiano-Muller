@@ -26,7 +26,7 @@ const BackgroundVideo: React.FC = () => {
       <video
         ref={videoRef}
         className="bg-video w-auto h-auto max-w-full max-h-full object-contain opacity-50"
-        src="/videos/teste-23s-muted.mp4"
+        src="/videos/teste-23s.mp4"
         autoPlay
         muted           // mutado por padrão
         loop
