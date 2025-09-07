@@ -11,6 +11,12 @@ const BackgroundVideo: React.FC = () => {
       try {
         video.muted = true
         video.playsInline = true as unknown as boolean
+        // Garantir atributos inline específicos de mobile
+        video.setAttribute('playsinline', '')
+        video.setAttribute('webkit-playsinline', '')
+        video.setAttribute('muted', '')
+        video.setAttribute('autoplay', '')
+        video.setAttribute('loop', '')
       } catch {}
     }
 
@@ -28,10 +34,13 @@ const BackgroundVideo: React.FC = () => {
     const handleCanPlay = () => { void tryPlay() }
     const handleLoadedMetadata = () => { void tryPlay() }
     const handleVisibility = () => { if (!document.hidden) void tryPlay() }
+    const handleInteraction = () => { void tryPlay() }
 
     video.addEventListener('canplay', handleCanPlay)
     video.addEventListener('loadedmetadata', handleLoadedMetadata)
     document.addEventListener('visibilitychange', handleVisibility)
+    document.addEventListener('touchstart', handleInteraction, { passive: true, once: true } as AddEventListenerOptions)
+    document.addEventListener('click', handleInteraction, { once: true } as AddEventListenerOptions)
 
     // Dispara uma primeira tentativa
     void tryPlay()
@@ -40,6 +49,8 @@ const BackgroundVideo: React.FC = () => {
       video.removeEventListener('canplay', handleCanPlay)
       video.removeEventListener('loadedmetadata', handleLoadedMetadata)
       document.removeEventListener('visibilitychange', handleVisibility)
+      document.removeEventListener('touchstart', handleInteraction as EventListener)
+      document.removeEventListener('click', handleInteraction as EventListener)
     }
   }, [])
 
@@ -52,8 +63,10 @@ const BackgroundVideo: React.FC = () => {
         muted
         loop
         playsInline
-        preload="metadata"
-       
+        preload="auto"
+        controls={false}
+        controlsList="nodownload nofullscreen noplaybackrate"
+        disablePictureInPicture
       >
         <source src="/videos/teste-23s.mp4" type="video/mp4" />
      
