@@ -12,3 +12,12 @@ body {
   background-color: #000000;
   color: #ffffff;
 }
+
+/* Oculta qualquer botão de reprodução em iOS/Safari para o vídeo de background */
+.bg-video::-webkit-media-controls-start-playback-button {
+  display: none !important;
+  -webkit-appearance: none;
+}
+.bg-video::-webkit-media-controls {
+  display: none !important;
+}
