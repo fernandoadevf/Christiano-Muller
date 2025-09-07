@@ -11,7 +11,6 @@ const BackgroundVideo: React.FC = () => {
       try {
         video.muted = true
         video.playsInline = true as unknown as boolean
-        // Garantir atributos inline específicos de mobile
         video.setAttribute('playsinline', '')
         video.setAttribute('webkit-playsinline', '')
         video.setAttribute('muted', '')
@@ -25,7 +24,6 @@ const BackgroundVideo: React.FC = () => {
       try {
         await video.play()
       } catch {
-        // autoplay silencioso pode ser bloqueado, garantimos muted e playsInline
         video.muted = true
         try { await video.play() } catch {}
       }
@@ -34,13 +32,10 @@ const BackgroundVideo: React.FC = () => {
     const handleCanPlay = () => { void tryPlay() }
     const handleLoadedMetadata = () => { void tryPlay() }
     const handleVisibility = () => { if (!document.hidden) void tryPlay() }
-    const handleInteraction = () => { void tryPlay() }
 
     video.addEventListener('canplay', handleCanPlay)
     video.addEventListener('loadedmetadata', handleLoadedMetadata)
     document.addEventListener('visibilitychange', handleVisibility)
-    document.addEventListener('touchstart', handleInteraction, { passive: true, once: true } as AddEventListenerOptions)
-    document.addEventListener('click', handleInteraction, { once: true } as AddEventListenerOptions)
 
     // Dispara uma primeira tentativa
     void tryPlay()
@@ -49,8 +44,6 @@ const BackgroundVideo: React.FC = () => {
       video.removeEventListener('canplay', handleCanPlay)
       video.removeEventListener('loadedmetadata', handleLoadedMetadata)
       document.removeEventListener('visibilitychange', handleVisibility)
-      document.removeEventListener('touchstart', handleInteraction as EventListener)
-      document.removeEventListener('click', handleInteraction as EventListener)
     }
   }, [])
 
@@ -59,6 +52,7 @@ const BackgroundVideo: React.FC = () => {
       <video
         ref={videoRef}
         className="w-auto h-auto max-w-full max-h-full object-contain opacity-50"
+        src="/videos/teste-23s-muted.mp4"
         autoPlay
         muted
         loop
@@ -67,10 +61,7 @@ const BackgroundVideo: React.FC = () => {
         controls={false}
         controlsList="nodownload nofullscreen noplaybackrate"
         disablePictureInPicture
-      >
-        <source src="/videos/teste-23s.mp4" type="video/mp4" />
-     
-      </video>
+      />
       <div className="absolute inset-0 bg-black/40" />
     </div>
   )
